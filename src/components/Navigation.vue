@@ -49,6 +49,12 @@ export default {
   padding-top: 20px;
 }
 
+@media (max-width: 1160px) {
+  .navigation {
+    opacity: 0;
+  }
+}
+
 .shop {
   display: flex;
   font-size: 18px;

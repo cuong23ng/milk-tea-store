@@ -47,6 +47,49 @@ export default {
   transform: scale(1.01);
   box-shadow: 0 6px 6px -4px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
+
+@media (min-width: 360px) and (max-width: 767px) {
+  .product-card {
+    width: 200px;
+    height: 252px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 879px) {
+  .product-card {
+    width: 170px;
+    height: 215px;
+  }
+}
+
+@media (min-width: 890px) and (max-width: 999px) {
+  .product-card {
+    width: 200px;
+    height: 252px;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1160px) {
+  .product-card {
+    width: 170px;
+    height: 215px;
+  }
+}
+
+@media (min-width: 1160px) and (max-width: 1249px) {
+  .product-card {
+    width: 200px;
+    height: 252px;
+  }
+}
+
+@media (min-width: 1250px) and (max-width: 1379px) {
+  .product-card {
+    width: 220px;
+    height: 278px;
+  }
+}
+
 .product-header {
   flex: 6;
 }
@@ -94,4 +137,5 @@ export default {
   font-size: 20px;
   font-weight: 700;
 }
+
 </style>

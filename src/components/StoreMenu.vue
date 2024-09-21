@@ -2,7 +2,7 @@
 <div class="menu">
   <div class="title">{{ shop.name }} Menu</div>
   <div class="setting">
-    <button class="filter">Filter</button>
+    <button class="filter-button">Filter</button>
     <div class="sort">
       <img v-if="sortType" @click.prevent="changeDirection" class="asc-dsc" src="../assets/sort.png"/>
       <div>Sort By</div>
@@ -93,6 +93,7 @@ export default {
   margin-left: 400px;
   margin-bottom: 100px;
   text-align: center;
+  transition: 0.5s ease all
 }
 
 .title {
@@ -109,7 +110,7 @@ export default {
   margin: 45px 0;
 }
 
-.filter {
+.filter-button {
   border: none;
   border-radius: 5px;
   padding: 12px 43px;
@@ -150,17 +151,98 @@ export default {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 45px;
   column-gap: 40px;
+  transition: 0.5s ease all
 }
 
-@media (min-width: 899px) and (max-width: 1399px) {
+@media (min-width: 360px) and (max-width: 767px) {
   .products-grid {
     grid-template-columns: 1fr 1fr;
+    column-gap: 10%;
+  }
+  .menu {
+    margin-left: 70px;
   }
 }
 
-@media (max-width: 1400px) {
+@media (min-width: 768px) and (max-width: 879px) {
   .products-grid {
     grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 4%;
+  }
+  .menu {
+    margin-left: 40px;
+  }
+}
+
+@media (min-width: 890px) and (max-width: 999px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 6%;
+  }
+  .menu {
+    margin-left: 50px;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1099px) {
+  .menu {
+    margin-left: 50px;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1159px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 3%;
+  }
+  .menu {
+    margin-left: 100px;
+  }
+}
+
+@media (min-width: 1160px) and (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 6%;
+  }
+  .menu {
+    margin-left: 300px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1249px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 8%;
+  }
+  .menu {
+    margin-left: 330px;
+  }
+}
+
+@media (min-width: 1250px) and (max-width: 1379px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 4%;
+  }
+  .menu {
+    margin-left: 330px;
+  }
+}
+
+@media (min-width: 1380px) and (max-width: 1459px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 5%;
+  }
+  .menu {
+    margin-left: 300px;
+  }
+}
+
+@media (min-width: 1460px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 </style>
