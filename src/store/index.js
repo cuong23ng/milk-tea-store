@@ -23,12 +23,18 @@ export default createStore({
     async fetchProducts({ commit, state }) {
       try {
         const res = await fetch('/storeProducts.json')
-        if (!res.ok) {
-          throw new Error('Failed to fetch data to product.json')
+        const res2 = await fetch('/products.json')
+        if (!res.ok || !res2.ok) {
+          throw new Error('Failed to fetch data to storeProducts.json')
         }
         const data = await res.json()
-        const currentSP = data.shopProducts.filter(product => product.shop === state.shop.id)
-        commit('setProducts', currentSP)
+        const data2 = await res2.json()
+        
+        const productsId = data.shopProducts.filter(product => product.shop === state.shop.id).map(product => product.product)
+
+        const products = data2.products.filter(product => productsId.includes(product.id))
+        
+        commit('setProducts', products)
       } catch (error) {
         console.error(error)
       }

@@ -28,7 +28,7 @@ export default {
         }
         const data = await response.json()
         shops.value = data.stores
-        console.log('HomeView: ', shops.value)
+        // console.log('HomeView: ', shops.value)
       } catch (error) {
         console.error(error);
       }

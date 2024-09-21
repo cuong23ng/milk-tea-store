@@ -4,16 +4,22 @@
   <div class="setting">
     <button class="filter">Filter</button>
     <div class="sort">
+      <img v-if="sortType" @click.prevent="changeDirection" class="asc-dsc" src="../assets/sort.png"/>
       <div>Sort By</div>
-      <select class="sort-selection">
-        <option>Name</option>
-        <option>Price</option>
+      <select class="sort-selection" v-model="sortType">
+        <option value="name">Name</option>
+        <option value="price">Price</option>
       </select>
     </div>
   </div>
-  <div class="products-grid">
+  <div v-if="!sortType" class="products-grid">
     <div v-for="product in products" :key="product.id">
       <!-- Product ID: {{ product.product }} -->
+      <ProductCard :product="product" />
+    </div>
+  </div>
+  <div v-else class="products-grid">
+    <div v-for="product in sortedProducts" :key="product.id">
       <ProductCard :product="product" />
     </div>
   </div>
@@ -37,20 +43,45 @@ export default {
     }
   },
   setup(props) {
-    console.log('Menu: ', props.shop);
+    // console.log('Menu: ', props.shop);
 
     const store = useStore()
-
     store.dispatch('fetchProducts')
+
+    const sortType = ref()
+    const direction = ref(0)
     const products = computed(() => store.getters.products)
+    const sortedProducts = computed(() => {
+      const sorted = [...products.value]
+      if (sortType.value === 'name') {
+        if (!direction.value) {
+          return sorted.sort((a, b) => a.name.localeCompare(b.name))
+        }
+        else {
+          return sorted.sort((a, b) => b.name.localeCompare(a.name))
+        }
+      }
+      else if (sortType.value === 'price') {
+        if (!direction.value) {
+          return sorted.sort((a, b) => a.price - b.price)
+        }
+        else {
+          return sorted.sort((a, b) => b.price - a.price)
+        }
+      }
+    })
+
+    const changeDirection = () => {
+      direction.value = !direction.value
+    }
 
     return {
       props,
-      products
+      products,
+      sortedProducts,
+      sortType,
+      changeDirection
     }
-  },
-  methods: {
-    
   }
 }
 </script>
@@ -84,12 +115,24 @@ export default {
   padding: 12px 43px;
   background-color: rgb(34, 33, 80);
   color: rgb(245, 245, 245);
-  font-size: 16px
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .sort {
   display: flex;
   align-items: center;
+}
+
+.asc-dsc {
+  width: 12px;
+  margin-right: 5px;
+  opacity: 0.3;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.asc-dsc:hover {
+  opacity: 0.6;
 }
 
 .sort-selection {

@@ -1,24 +1,22 @@
 <template>
-  <div v-if="productDetail" class="product-card">
+  <div v-if="product" class="product-card">
     <div>
-      <div class="product-id">MT-0{{ productDetail.id }}</div>
-      <h4 class="product-name">{{ productDetail.name }}</h4>
+      <div class="product-id">MT-0{{ product.id }}</div>
+      <h4 class="product-name">{{ product.name }}</h4>
       <hr>
     </div>
     <div class="topping">
       <h5 class="topping-title">Toppings:</h5>
-      <div class="topping-items">{{ productDetail.toppings }}</div>
+      <div class="topping-items">{{ product.toppings }}</div>
     </div>
     <div class="outline">
       <div class="trending-box">Trending</div>
-      <div class="price">&#36;{{ productDetail.price }}</div>
+      <div class="price">&#36;{{ product.price }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
-
 export default {
   props: {
     product: {
@@ -26,26 +24,6 @@ export default {
       required: true
     }
   },
-  setup(props) {
-    const productDetail = ref()
-    onMounted(async () => {
-      try {
-        const res = await fetch('/products.json')
-        if (!res.ok) {
-          throw new Error ('Failed to fetch products data')
-        }
-        const data = await res.json()
-        productDetail.value = data.products.find((product) => product.id === props.product.product)
-        console.log(productDetail.value)
-      } catch (error) {
-        console.error(error)
-      }
-    })
-
-    return {
-      productDetail
-    }
-  }
 }
 </script>
 
