@@ -19,7 +19,6 @@ export default {
     }
   },
   setup(props) {
-    console.log('Nav: ', props.shops)
     const store = useStore()
 
     const showMenu = (selectedShop) => {

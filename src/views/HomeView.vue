@@ -34,6 +34,10 @@ export default {
       }
     })
 
+    onMounted(async () => {
+      store.dispatch('fetchFilterItems')
+    })
+
     const renderKey = ref(0);
 
     watch(() => store.state.shop, (newShop, oldShop) => {

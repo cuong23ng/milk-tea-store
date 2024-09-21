@@ -1,8 +1,9 @@
 <template>
 <div class="menu">
   <div class="title">{{ shop.name }} Menu</div>
+
   <div class="setting">
-    <button class="filter-button">Filter</button>
+    <button @click.prevent="showFilterTable" class="filter-button">Filter</button>
     <div class="sort">
       <img v-if="sortType" @click.prevent="changeDirection" class="asc-dsc" src="../assets/sort.png"/>
       <div>Sort By</div>
@@ -12,14 +13,31 @@
       </select>
     </div>
   </div>
-  <div v-if="!sortType" class="products-grid">
-    <div v-for="product in products" :key="product.id">
-      <!-- Product ID: {{ product.product }} -->
+
+  <div v-if="filter" class="filter-table">
+    <div class="filter-table-title">Toppings:</div>
+    <div class="filter-table-grid">
+      <div v-for="(item, index) in filterItems" :key="index">
+          <label class="container">{{ item }}
+            <input type="checkbox" :value="item" v-model="checkedItems"/>
+            <span class="checkmark"></span>
+          </label>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="checkedItems[0]" class="products-grid">
+    <div v-for="product in filterProducts" :key="product.id">
+      <ProductCard :product="product" />
+    </div>
+  </div>
+  <div v-else-if="sortType" class="products-grid">
+    <div v-for="product in sortedProducts" :key="product.id">
       <ProductCard :product="product" />
     </div>
   </div>
   <div v-else class="products-grid">
-    <div v-for="product in sortedProducts" :key="product.id">
+    <div v-for="product in products" :key="product.id">
       <ProductCard :product="product" />
     </div>
   </div>
@@ -28,7 +46,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import ProductCard from './ProductCard.vue';
 
 export default {
@@ -50,6 +68,8 @@ export default {
 
     const sortType = ref()
     const direction = ref(0)
+    const filter = ref(0)
+    
     const products = computed(() => store.getters.products)
     const sortedProducts = computed(() => {
       const sorted = [...products.value]
@@ -71,8 +91,28 @@ export default {
       }
     })
 
+    const checkedItems = ref([])
+    const filterProducts = ref([])
+    watch(checkedItems, () => {
+      // console.log('ticked: ', checkedItems.value)
+      filterProducts.value = products.value.filter(product => {
+        for(let i in checkedItems.value) {
+          const item = checkedItems.value[i]
+          if (!product.toppings.toLowerCase().includes(item)) {
+            return false
+          }
+        }
+        return true
+      })
+      console.log('filter: ', filterProducts.value)
+    })
+
     const changeDirection = () => {
       direction.value = !direction.value
+    }
+
+    const showFilterTable = () => {
+      filter.value = !filter.value
     }
 
     return {
@@ -80,7 +120,12 @@ export default {
       products,
       sortedProducts,
       sortType,
-      changeDirection
+      changeDirection,
+      filterItems: store.getters.filterItems,
+      filter,
+      showFilterTable,
+      checkedItems,
+      filterProducts
     }
   }
 }
@@ -91,9 +136,9 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 400px;
-  margin-bottom: 100px;
   text-align: center;
-  transition: 0.5s ease all
+  transition: 0.5s ease all;
+  min-width: 62%;
 }
 
 .title {
@@ -108,6 +153,7 @@ export default {
   color: rgb(34, 33, 80);
   font-weight: 700;
   margin: 45px 0;
+  margin-bottom: 30px;
 }
 
 .filter-button {
@@ -144,6 +190,87 @@ export default {
   color: rgb(34, 33, 80);
   font-size: 16px;
   margin-left: 18px;
+}
+
+.filter-table {
+  background-color: white;
+  font-size: 20px;
+  min-height: 110px;
+  text-align: left;
+  padding: 30px 40px;
+  margin-bottom: 45px;
+}
+
+.filter-table-title {
+  font-weight: 700;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.filter-table-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 25px;
+  column-gap: 120px;
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 33px;
+  cursor: pointer;
+  align-items: center;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #ffffff;
+  border: 2px solid rgba(34, 33, 80, 0.8);
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: white;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 2px;
+	left: 2px;
+	bottom: 2px;
+  right: 2px;
+	background: rgb(34, 33, 80);
 }
 
 .products-grid {
