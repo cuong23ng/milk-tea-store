@@ -1,6 +1,5 @@
 {
-  "shopProducts":
-  [
+  "shopProducts": [
     {
       "id": 1,
       "shop": 1,
@@ -50,6 +49,31 @@
       "id": 10,
       "shop": 2,
       "product": 5
+    },
+    {
+      "id": 11,
+      "shop": 1,
+      "product": 6
+    },
+    {
+      "id": 12,
+      "shop": 1,
+      "product": 7
+    },
+    {
+      "id": 13,
+      "shop": 4,
+      "product": 8
+    },
+    {
+      "id": 14,
+      "shop": 5,
+      "product": 9
+    },
+    {
+      "id": 15,
+      "shop": 1,
+      "product": 10
     }
   ]
 }

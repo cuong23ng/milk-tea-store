@@ -10,7 +10,7 @@
       "id": 2,
       "name": "Green Milk Tea",
       "price": 4.6,
-      "toppings": "pearl"
+      "toppings": "Pearl"
     },
     {
       "id": 3,
@@ -29,6 +29,36 @@
       "name": "Mango Milk Tea",
       "price": 5.1,
       "toppings": "Aloe, Pearl"
+    },
+    {
+      "id": 6,
+      "name": "Strawberry Milk Tea",
+      "price": 4.9,
+      "toppings": "Lychee jelly, Pearl"
+    },
+    {
+      "id": 7,
+      "name": "Chocolate Milk Tea",
+      "price": 5.0,
+      "toppings": "Milk foam"
+    },
+    {
+      "id": 8,
+      "name": "Taro Milk Tea",
+      "price": 5.2,
+      "toppings": "Pearl"
+    },
+    {
+      "id": 9,
+      "name": "Matcha Milk Tea",
+      "price": 5.3,
+      "toppings": "Red bean, Pearl"
+    },
+    {
+      "id": 10,
+      "name": "Winter Melon Tea",
+      "price": 4.7,
+      "toppings": "Basil seeds, Aloe"
     }
   ]
 }

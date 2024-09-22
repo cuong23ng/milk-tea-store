@@ -9,8 +9,8 @@
       <h5 class="topping-title">Toppings:</h5>
       <div class="topping-items">{{ product.toppings }}</div>
     </div>
+    <div v-if="product.id === 1 || product.id === 2" class="trending-box">Trending</div>
     <div class="outline">
-      <div class="trending-box">Trending</div>
       <div class="price">&#36;{{ product.price }}</div>
     </div>
   </div>
@@ -29,6 +29,7 @@ export default {
 
 <style>
 .product-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   color: rgb(34, 33, 80);
@@ -122,10 +123,13 @@ export default {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
 }
 
 .trending-box {
+  position: absolute;
+  left: 0;
+  bottom: 21px;
   background-color: rgb(34, 33, 80);
   color: rgb(235, 235, 235);
   font-size: 12px;
