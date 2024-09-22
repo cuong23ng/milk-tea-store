@@ -30,7 +30,7 @@ vue add babel
 
 ### Installation
 1. Clone the repository: https://github.com/cuong23ng/milk-tea-store.git
-2. Navigate into the directory: cd milk-tea-store
+2. Navigate into the directory: ```cd milk-tea-store```
 3. Project setup: ```npm install```
 4. Compiles and hot-reloads for development: ```npm run serve```
 5. Compiles and minifies for production: ```npm run build```
