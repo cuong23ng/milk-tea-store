@@ -2,6 +2,10 @@
   <div class="home">
     <Navigation :shops="shops"/>
     <StoreMenu v-if="currentShop" class="menu" :key="renderKey" :shop="currentShop"/>
+    <div class="title" v-else>
+      <h1>Milk Tea Store</h1>
+      <h3>by Cuong</h3>
+    </div>
   </div>
 </template>
 
@@ -62,5 +66,13 @@ export default {
 
 .menu {
   
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-left: 40%;
 }
 </style>

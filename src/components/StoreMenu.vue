@@ -3,9 +3,9 @@
   <div class="title">{{ shop.name }} Menu</div>
 
   <div class="setting">
-    <button @click.prevent="showFilterTable" class="filter-button">Filter</button>
+    <button @click="showFilterTable" class="filter-button">Filter</button>
     <div class="sort">
-      <img v-if="sortType" @click.prevent="changeDirection" class="asc-dsc" src="../assets/sort.png"/>
+      <img v-if="sortType" @click="changeDirection" class="asc-dsc" src="../assets/sort.png"/>
       <div>Sort By</div>
       <select class="sort-selection" v-model="sortType">
         <option value="name">Name</option>

@@ -1,7 +1,7 @@
 <template>
   <div class="navigation">
     <h2>Milk Tea Store</h2>
-    <div @click.prevent="showMenu(shop)" class="shop" v-for="shop in shops" :key="shop.id">
+    <div @click="showMenu(shop)" class="shop" v-for="shop in shops" :key="shop.id">
       {{ shop.name }} 
     </div>
   </div>
