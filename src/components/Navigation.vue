@@ -46,12 +46,7 @@ export default {
   bottom: 0;
   left: 0;
   padding-top: 20px;
-}
-
-@media (max-width: 1160px) {
-  .navigation {
-    opacity: 0;
-  }
+  z-index: 200;
 }
 
 .shop {
@@ -62,6 +57,29 @@ export default {
   justify-content: center;
   cursor: pointer;
   padding: 10px;
+}
+
+@media (max-width: 1160px) {
+  .navigation {
+    opacity: 0.9;
+    width: 100%;
+    height: 40px;
+    right: 0;
+    flex-direction: row;
+    padding-top: 0;
+    padding-left: 20px;
+  }
+
+  .shop {
+    font-size: 15px;
+    padding: 0;
+    margin-right: 20px;
+  }
+  
+  h2 {
+    margin-right: 20px;
+    font-size: 15px;
+  }
 }
 
 .shop:hover {
