@@ -5,7 +5,7 @@
   <div class="setting">
     <button @click="showFilterTable" class="filter-button">Filter</button>
     <div class="sort">
-      <img v-if="sortType" @click="changeDirection" class="asc-dsc" src="../assets/sort.png"/>
+      <img v-show="sortType" @click="changeDirection" class="asc-dsc" src="../assets/sort.png"/>
       <div>Sort By</div>
       <select class="sort-selection" v-model="sortType">
         <option value="name">Name</option>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div v-if="filter" class="filter-table">
+  <div v-show="filter" class="filter-table">
     <div class="filter-table-title">Toppings:</div>
     <div class="filter-table-grid">
       <div v-for="(item, index) in filterItems" :key="index">
